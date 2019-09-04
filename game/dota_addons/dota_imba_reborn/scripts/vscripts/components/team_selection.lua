@@ -60,6 +60,9 @@ local TeamSelectionEvents = {
 	failure = "imba_teamselect_failure"
 }
 
+local bestDifference = 999999
+local bestComp = {}
+
 -- Utility function to recieve a list of all player steamids
 function TeamSelectionGetAllPlayers()
 	local playerIds = {}
@@ -283,13 +286,32 @@ function KeepTeams10v10TeamSelectionComputeRound(obj, event)
 		-- this does nothing else then to run Game.AutoAssignPlayersToTeams() on the host
 		-- damn volvo doesn't give us this function on servers
 		CustomGameEventManager:Send_ServerToPlayer(player, TeamSelectionEvents.compute, nil)
-	
+		
+		KeepTeams10v10TeamSelectionCalculateDifference()
+
 		-- increment our count
 		TeamSelectionComputedCount = TeamSelectionComputedCount + 1
 
 	else
 		-- we are done and dont need more computations
 		KeepTeams10v10TeamSelectionDone()
+	end
+end
+
+function KeepTeams10v10TeamSelectionCalculateDifference()
+	local comp = KeepTeams10v10TeamSelectionGetTeamComposition();
+	local radiantWinrate = 0;
+	local direWinrate = 0;
+	for _, steamid in ipairs(comp[2]) do
+		radiantWinrate = radiantWinrate + api.players[steamid].winrate_10v10
+	end
+	for _, steamid in ipairs(comp[3]) do
+		direWinrate = direWinrate + api.players[steamid].winrate_10v10
+	end
+	local difference = math.abs(radiantWinrate-direWinrate)
+	if difference < bestDifference then
+		bestDifference = difference
+		bestComp = comp
 	end
 end
 
@@ -300,12 +322,16 @@ function KeepTeams10v10TeamSelectionDone()
 	-- unregister listener and send complete event
 	CustomGameEventManager:UnregisterListener(TeamSelectionListeners.computeComplete)
 
+	-- We dont need to perform API request anymore
+	KeepTeams10v10TeamSelectionFinalize()
+
+
 	-- perform api request
-	api.imba.matchmaking.imr_10v10_teams(
-		TeamSelectionGetAllPlayers(),
-		TeamSelectionComputed,
-		KeepTeams10v10TeamSelectionFinalize
-	)
+	-- api.imba.matchmaking.imr_10v10_teams(
+	-- 	TeamSelectionGetAllPlayers(),
+	-- 	TeamSelectionComputed,
+	-- 	KeepTeams10v10TeamSelectionFinalize
+	-- )
 end
 
 function TeamSelectionFallbackAssignment()
@@ -319,19 +345,10 @@ function TeamSelectionFallbackAssignment()
 	CustomGameEventManager:Send_ServerToAllClients(TeamSelectionEvents.failure, nil)
 end
 
-function KeepTeams10v10TeamSelectionFinalize(response)
-
-	print("recieved response from server")
-
-	-- catch errors
-	if not response.ok then
-		print("error")
-		TeamSelectionFallbackAssignment()
-		return
-	end
+function KeepTeams10v10TeamSelectionFinalize()
 
 	-- assign teams based on response
-	for _, steamid in ipairs(response.data.teams[1]) do
+	for _, steamid in ipairs(bestComp[2]) do
 		local player = nil
 		for i = 0, PlayerResource:GetPlayerCount() - 1 do
 			local sid = tostring(PlayerResource:GetSteamID(i))
@@ -341,7 +358,7 @@ function KeepTeams10v10TeamSelectionFinalize(response)
 		end
 	end
 
-	for _, steamid in ipairs(response.data.teams[2]) do
+	for _, steamid in ipairs(bestComp[3]) do
 		local player = nil
 		for i = 0, PlayerResource:GetPlayerCount() - 1 do
 			local sid = tostring(PlayerResource:GetSteamID(i))
