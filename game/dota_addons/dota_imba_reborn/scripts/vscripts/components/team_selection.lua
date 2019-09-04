@@ -1,4 +1,4 @@
--- Copyright (C) 2018  The Dota IMBA Development Team
+-- Copyright (C) 2019  The Dota IMBA Development Team
 --
 -- Licensed under the Apache License, Version 2.0 (the "License");
 -- you may not use this file except in compliance with the License.
@@ -13,8 +13,32 @@
 -- limitations under the License.
 --
 -- Editors:
---     suthernfriend
---
+--		suthernfriend
+--		EarthSalamander
+
+-----------------------------------
+-- Starting point
+-----------------------------------
+
+ListenToGameEvent('game_rules_state_change', function(keys)
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
+		print("Initializing team selection")
+
+		-- 5v5                will use complete random
+		-- 10v10              parties will be kept
+		-- mutation, imbathrow normal manual procedure
+
+--		if GetMapName() == "imba_5v5" then
+--			Random5v5TeamSelection()
+--		elseif GetMapName() == "imba_10v10" then
+--			KeepTeams10v10TeamSelection()
+		if GetMapName() == "imba_5v5" or GetMapName() == "imba_10v10" then
+			KeepTeams10v10TeamSelection()
+		else
+			ManualTeamSelection()
+		end
+	end
+end, nil)
 
 -----------------------------------
 -- Utility and configuration
@@ -51,28 +75,6 @@ function TeamSelectionUnassignTeams()
 		local player = PlayerResource:GetPlayer(i)
 		-- set team to no_team
 		player:SetTeam(DOTA_TEAM_NOTEAM)
-	end
-end
-
------------------------------------
--- Starting point
------------------------------------
-
--- Called in DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP
-function InitializeTeamSelection()
-
-	print("Initializing team selection")
-
-	-- 5v5                will use complete random
-	-- 10v10              parties will be kept
-	-- mutation, imbathrow normal manual procedure
-
-	if GetMapName() == MapRanked5v5() then
-		Random5v5TeamSelection()
-	elseif GetMapName() == MapRanked10v10() then
-		KeepTeams10v10TeamSelection()
-	else
-		ManualTeamSelection()
 	end
 end
 
