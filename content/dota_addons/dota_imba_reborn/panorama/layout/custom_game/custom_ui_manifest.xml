@@ -288,5 +288,8 @@
 
 		<!-- Credits: Dota 12v12 (Dota 2 Unofficial dev team) -->
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/dota_hud_chat_wheel.xml" />
+
+		<!-- Credits: Angel Arena Black Star (ark120202) -->
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/panorama_shop.xml" />
 	</Panel>
 </root>

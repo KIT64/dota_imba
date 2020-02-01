@@ -346,3 +346,91 @@ function ToggleUI() {
 		toggle_ui = true;
 	}
 }
+
+// Credits: Angel Arena Black Star (ark120202)
+
+Game.MouseEvents = {
+	OnLeftPressed: []
+};
+Game.DisableWheelPanels = [];
+GameUI.SetMouseCallback(function(eventName, arg) {
+	var result = false;
+	var ClickBehaviors = GameUI.GetClickBehaviors();
+	if (eventName === 'pressed') {
+		if (arg === 0) {
+			if (Game.MouseEvents.OnLeftPressed.length > 0) {
+				for (var k in Game.MouseEvents.OnLeftPressed) {
+					var r = Game.MouseEvents.OnLeftPressed[k](ClickBehaviors, eventName, arg);
+					if (r === true)
+						result = r;
+				}
+			}
+		} else if (ClickBehaviors === CLICK_BEHAVIORS.DOTA_CLICK_BEHAVIOR_NONE && (arg === 5 || arg === 6)) {
+			for (var index in Game.DisableWheelPanels) {
+				if (IsCursorOnPanel(Game.DisableWheelPanels[index])) {
+					return true;
+				}
+			}
+		};
+	};
+	return result;
+});
+
+function DynamicSubscribePTListener(table, callback, OnConnectedCallback) {
+	if (PlayerTables.IsConnected()) {
+		//$.Msg("Update " + table + " / PT connected")
+		var tableData = PlayerTables.GetAllTableValues(table);
+		if (tableData != null)
+			callback(table, tableData, {});
+		var ptid = PlayerTables.SubscribeNetTableListener(table, callback);
+		if (OnConnectedCallback != null) {
+			OnConnectedCallback(ptid);
+		}
+	} else {
+		//$.Msg("Update " + table + " / PT not connected, repeat")
+		$.Schedule(0.1, function() {
+			DynamicSubscribePTListener(table, callback, OnConnectedCallback);
+		});
+	}
+}
+
+function DynamicSubscribeNTListener(table, callback, OnConnectedCallback) {
+	var tableData = CustomNetTables.GetAllTableValues(table);
+	if (tableData != null) {
+		_.each(tableData, function(ent) {
+			callback(table, ent.key, ent.value);
+		});
+	}
+	var ptid = CustomNetTables.SubscribeNetTableListener(table, callback);
+	if (OnConnectedCallback != null) {
+		OnConnectedCallback(ptid);
+	}
+}
+/*
+GameUI.CustomUIConfig().custom_entity_values = GameUI.CustomUIConfig().custom_entity_values || {};
+DynamicSubscribeNTListener('custom_entity_values', function(tableName, key, value) {
+	GameUI.CustomUIConfig().custom_entity_values[key] = value;
+});
+*/
+function Hook() {
+	this.handlers = [];
+}
+
+Hook.prototype.tap = function(handler) {
+	this.handlers.push(handler)
+}
+
+Hook.prototype.call = function() {
+	var args = arguments;
+	_.each(this.handlers, function(handler) {
+		handler.apply(null, args)
+	})
+}
+
+GameUI.CustomUIConfig().CustomHooks = {
+	custom_talents_toggle_tree: new Hook(),
+	panorama_shop_open_close: new Hook(),
+	panorama_shop_show_item: new Hook(),
+	panorama_shop_show_item_if_open: new Hook(),
+	player_profiles_show_info: new Hook(),
+}

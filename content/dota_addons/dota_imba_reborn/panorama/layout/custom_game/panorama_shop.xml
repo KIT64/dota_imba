@@ -1,0 +1,157 @@
+<!-- Credits: Angel Arena Black Star (ark120202) -->
+
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/dotastyles.vcss_c" />
+		<include src="file://{resources}/styles/custom_game/panorama_shop.css" />
+		<include src="file://{resources}/styles/custom_game/panorama_shop_itembuilds.css" />
+	</styles>
+
+	<scripts>
+		<include src="file://{resources}/scripts/custom_game/util.js" />
+		<include src="file://{resources}/scripts/custom_game/panorama_shop_itembuilds.js" />
+		<include src="file://{resources}/scripts/custom_game/panorama_shop.js" />
+	</scripts>
+
+	<snippets>
+		<snippet name="SmallItem">
+			<Panel class="SmallItemPanel" draggable="true">
+				<Button id="SmallItemButton">
+					<DOTAItemImage hittest="false" id="SmallItemImage" />
+					<Label hittest="false" id="SmallItemStock"/>
+					<Label hittest="false" id="StockTimer" />
+					<Panel hittest="false" id="StockOverlay" />
+				</Button>
+			</Panel>
+		</snippet>
+		<snippet name="GuideListEntry">
+			<RadioButton class="GuideListEntry" group="GuideEntries">
+				<Panel id="SelectedBar" />
+				<Panel id="GuideEntryTitles">
+					<Label id="GuideEntryTitle" text="{s:guide_entry_title}" />
+					<Panel id="GuideEntrySubtitleRow">
+						<DOTAUserName id="GuideEntryAuthor" />
+						<Label id="GuideEntryVersion" />
+					</Panel>
+					<TextButton id="SelectGuideButton" text="#DOTA_Guide_Select" />
+					<Label id="SelectedGuideLabel" text="#DOTA_Guide_Selected" />
+				</Panel>
+				<Panel id="GuideEntryRightColumn">
+					<Label id="GuideEntryRating" text="{s:guide_entry_rating}" />
+				</Panel>
+			</RadioButton>
+		</snippet>
+		<snippet name="ItembuildGroup">
+			<Panel class="ItembuildItemGroup">
+				<TextEntry id="ItembuildItemGroupTitle" maxchars="20" />
+				<Panel id="ItembuildItemGroupItemRoot" draggable="true" />
+			</Panel>
+		</snippet>
+	</snippets>
+	<Panel hittest="false" class="base">
+		<Panel hittest="true" onmouseactivate="" acceptfocus="true" onfocus="DropInputFocus()" oncancel="OpenCloseShop(false)" id="ShopBase">
+			<Panel id="ItembuildsPanel">
+				<Label id="ItembuildHeader" text="DOTA_Guide_Browse" onactivate="ToggleGuidesBrowser()" />
+				<Panel id="ItembuildTitleContainer">
+					<Panel id="ItembuildTitleTitleRow">
+						<Label id="Itembuild_title" />
+						<Button id="EditButton" onactivate="ToggleEditMode()" onmouseout="UIHideTextTooltip()" onmouseover="UIShowTextTooltip(#DOTA_HUD_EditModeTooltip)"/>
+					</Panel>
+					<Panel id="ItembuildTitleSubitleRow">
+						<DOTAUserName id="Itembuild_author_player" />
+						<Label id="Itembuild_version" />
+					</Panel>
+				</Panel>
+				<Panel id="ItembuildPanelsContainer">
+					<Panel id="ItembuildPanelsRoot" />
+					<Label id="ItembuildAddGroupButton" text="#panorama_shop_itembuilds_new_group" onactivate="AddNewGroupToItembuild()" allowtextselection="false" />
+				</Panel>
+			</Panel>
+			<Panel id="ShopItemBasePanel">
+				<Panel id="ShopItemList">
+					<Panel id="ShopSearch">
+						<Button id="ShowHideItemguidesButton" hittest="true" onactivate="$.GetContextPanel().ToggleClass('ItembuildsHidden');">
+							<Panel id="ShowHideItemguidesIcon" hittest="false" />
+						</Button>
+						<TextEntry id="ShopSearchEntry" oncancel="ClearSearch()" oninputsubmit="DropInputFocus()" placeholder="#panorama_shop_search_placeholder"/>
+					</Panel>
+					<Panel id="ShopTabs" />
+					<Panel id="ShopItems">
+						<Panel id="ShopItemsBase" />
+						<Panel id="ShopSearchOverlay" />
+					</Panel>
+				</Panel>
+				<Panel id="ItemRecipeBox">
+					<Panel id="ItemRecipeBoxRows">
+						<Panel class="ItemRecipeBoxRow" id="ItemRecipeBoxRow1" />
+						<Panel class="ItemRecipeBoxRow" id="ItemRecipeBoxRow2" />
+						<Panel class="ItemRecipeBoxRow" id="ItemRecipeBoxRow3" />
+					</Panel>
+					<Panel hittest="false" id="ItemRecipeBoxDrops">
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_freya" src="file://{images}/heroes/npc_arena_hero_freya.png" style="position: 59px 40px 0;"/>
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_zaken" src="file://{images}/heroes/npc_arena_hero_zaken.png" style="position: 194px 40px 0;"/>
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_l1_v1" src="file://{images}/custom_game/units/npc_arena_boss_l1_v1.png" style="position: 1px 80px 0;"/>
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_l1_v2" src="file://{images}/custom_game/units/npc_arena_boss_l1_v2.png" style="position: 64px 80px 0;"/>
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_cursed_zeld" src="file://{images}/custom_game/units/npc_arena_boss_cursed_zeld.png" style="position: 128px 80px 0;"/>
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_l2_v1" src="file://{images}/custom_game/units/npc_arena_boss_l2_v1.png" style="position: 190px 80px 0;"/>
+						<Image class="UnitItemlikeRecipePanel" id="ItemRecipeBoxDrops_npc_arena_boss_l2_v2" src="file://{images}/custom_game/units/npc_arena_boss_l2_v2.png" style="position: 251px 80px 0;"/>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+		<Panel hittest="true" onmouseactivate="" id="QuickBuyPanel">
+			<Panel class="DropDownValidTarget" hittest="false" />
+			<Panel id="QuickBuyPanelItems" />
+			<Image id="QuickBuyClearButtonPanel" onactivate="ClearQuickbuyItems()"/>
+			<Panel id="QuickBuyStickyButtonPanel" />
+		</Panel>
+		<Panel id="GuidesBrowser">
+			<Panel id="GuidesBrowserLeft">
+				<!-- <DropDown id="LanguageDropdown"/> -->
+				<Panel id="GuidesAvaliableList" />
+			</Panel>
+			<Panel id="GuidesBrowserRight">
+				<Button class="CloseButton" onactivate="$.GetContextPanel().RemoveClass('GuidesBrowserVisible')" />
+				<Panel id="GuidesHeader">
+					<Panel id="GuidesHeaderTitleRow">
+						<TextEntry id="GuidesTitleLabel" maxchars="20" undohistory="enabled" />
+						<Button class="ButtonBevel" id="GuideTogglePublish" onactivate="TogglePublishMode();">
+							<Label id="GuideTogglePublishLabel" text="panorama_shop_guide_publish" hittest="false" />
+							<Label id="GuideTogglePublishLabelCancel" text="panorama_shop_guide_cancel" hittest="false" />
+						</Button>
+					</Panel>
+					<!-- <Label id="GuidesBrowserDescription" text="#DOTA_Guide_WorkshopSubtitle" />  -->
+					<Label id="GuidesBrowserDescription" />
+				</Panel>
+				<Panel id="GuideArea">
+					<Panel id="GuideItemBuild" />
+					<Panel id="GuideRightColumn">
+						<Panel id="GuideRatingBlock" >
+							<Panel id="GuideRatingLabels" >
+								<Label id="GuideRatingValue" class="GuideStat" text="{s:guide_player_rating}" />
+								<Label id="RatingLabel" class="GuideStatLabel" text="#DOTA_Guide_PlayerRating" />
+							</Panel>
+							<Panel id="VotingButtons">
+								<Button id="VoteUpButton" onactivate="GuideVote($.GetContextPanel().BHasClass('VotedYes') ? 0 : 1)" >
+									<Image class="VoteIcon" src="s2r://panorama/images/icon_thumbs_up_png.vtex" scaling="stretch-to-fit-preserve-aspect" />
+								</Button>
+								<Button id="VoteDownButton" onactivate="GuideVote($.GetContextPanel().BHasClass('VotedNo') ? 0 : -1)" >
+									<Image class="VoteIcon VoteIconFlipped" src="s2r://panorama/images/icon_thumbs_up_png.vtex" scaling="stretch-to-fit-preserve-aspect" />
+								</Button>
+							</Panel>
+						</Panel>
+						<Panel id="GuidePublishBlock">
+							<TextEntry id="GuidePublishYouTube" placeholder="youtube.com/watch?v=..." />
+							<TextEntry id="GuidePublishDescription" placeholder="Text..." maxchars="250" undohistory="enabled" />
+							<TextButton class="ButtonBevel Green" id="GuidePublishButton" onactivate="PublishGuide(SelectedBuild)" text="panorama_shop_guide_publish" />
+						</Panel>
+						<Panel id="GuideYouTubeLogo" onactivate="OpenYoutubeForGuide(SelectedBuild)" >
+							<Image src="file://{images}/custom_game/shop/YouTube-logo-full_color.png" />
+							<Label text="panorama_shop_guide_youtube_open" />
+						</Panel>
+					</Panel>
+				</Panel>
+			</Panel>
+		</Panel>
+	</Panel>
+</root>

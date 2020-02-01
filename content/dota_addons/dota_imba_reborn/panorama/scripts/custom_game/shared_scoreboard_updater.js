@@ -310,7 +310,7 @@ function _ScoreboardUpdater_UpdatePlayerPanel(scoreboardConfig, playersContainer
 		if (btnMuteVoice) {
 			btnMuteVoice.SetHasClass("Activated", Game.IsPlayerMuted(playerId));
 		}
-
+/*
 		var tableValue = CustomNetTables.GetTableValue("shared_unit_control", Game.GetLocalPlayerID());
 		if (tableValue && tableValue[playerId] != null) {
 			var btnShareUnit = playerPanel.FindChildInLayoutFile("BtnShareUnit");
@@ -328,7 +328,7 @@ function _ScoreboardUpdater_UpdatePlayerPanel(scoreboardConfig, playersContainer
 				btnDisableHelp.SetHasClass("Activated", ((tableValue[playerId] & 4) > 0));
 			}
 		}
-
+*/
 		var playerPortrait = playerPanel.FindChildInLayoutFile("HeroIcon");
 		if (playerPortrait) {
 			if (playerInfo.player_selected_hero !== "") {

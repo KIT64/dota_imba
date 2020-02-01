@@ -4,7 +4,6 @@
 	[
 		"game_options",
 		"player_table",
-		"shared_unit_control",
 		"battlepass_item_effects",
 		"game_state",
 		"hero_selection",
@@ -14,5 +13,6 @@
 		"hero_wearables",
 		"other_available_items",
 		"selection",
+		"custom_entity_values",
 	]
 }
