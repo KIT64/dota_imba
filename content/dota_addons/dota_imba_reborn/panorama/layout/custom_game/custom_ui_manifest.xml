@@ -288,5 +288,7 @@
 
 		<!-- Credits: Dota 12v12 (Dota 2 Unofficial dev team) -->
 		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/dota_hud_chat_wheel.xml" />
+
+		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/components/battlepass/battlepass.xml" /> 
 	</Panel>
 </root>
