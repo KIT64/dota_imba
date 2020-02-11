@@ -1,6 +1,13 @@
 "use strict";
 
-var secret_key = CustomNetTables.GetTableValue("game_options", "server_key")["1"];
+var secret_key = CustomNetTables.GetTableValue("game_options", "server_key");
+if (secret_key && secret_key["1"])
+	secret_key = secret_key["1"];
+
+var game_version = CustomNetTables.GetTableValue("game_options", "game_version");
+var game_type = undefined;
+if (game_version)
+	game_type = game_version.game_type;
 
 var api = {
 	timeout: 5000,
@@ -77,7 +84,7 @@ var api = {
 				data: data,
 				dataType: "json",
 				timeout: self.timeout,
-				headers : {'X-Dota-Server-Key' : CustomNetTables.GetTableValue("game_options", "server_key")["1"]},
+				headers : {'X-Dota-Server-Key' : secret_key, 'X-Dota-Game-Type' : game_type},
 				success: function (obj) {
 					if (obj.error || !obj.data)
 						reject("Request to '" + url + "' failed: " + (obj.message ? obj.message : "unknown error"));
@@ -106,22 +113,24 @@ var api = {
 if (Game.IsInToolsMode()) {
 
 	var info = {
-		steamid: "76561198057206770",
+		steamid: Game.GetLocalPlayerInfo().player_steamid,
 		hero: "npc_dota_hero_zuus",
 	};
 
+/*
 	api.get_player_armory(info).then(function (data) {
 		$.Msg(data);
 	}).catch(function (err) {
 		$.Msg(err)
 	});
-/*
+*/
 
 	var info = {
-		steamid: "76561198057206770",
-		item_id: "13042",
+		steamid: Game.GetLocalPlayerInfo().player_steamid,
 		slot_id: "persona_selector",
 		hero: "npc_dota_hero_invoker",
+		isEquipped: 1,
+		item_id: "13042",
 	};
 
 	api.update_player_armory(info).then(function (data) {
@@ -129,7 +138,7 @@ if (Game.IsInToolsMode()) {
 	}).catch(function (err) {
 		$.Msg(err)
 	});
-*/
+
 }
 
 /*

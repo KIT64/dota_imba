@@ -2,6 +2,8 @@
 	<scripts>
 		<include src="file://{resources}/scripts/custom_game/vanilla_keybinds.js" />
 		<include src="file://{resources}/scripts/custom_game/imba_invoker_tooltips.js" />
+<!--		<include src="file://{resources}/scripts/custom_game/util.js" />
+		<include src="file://{resources}/scripts/custom_game/api.js" /> -->
 	</scripts>
 
 	<script>
