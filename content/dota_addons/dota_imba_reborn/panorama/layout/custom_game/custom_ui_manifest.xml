@@ -17,14 +17,6 @@
 		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_PROTECT, false );      //Glyph.
 		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_INVENTORY_GOLD, false );     //Gold display.
 		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_SHOP_SUGGESTEDITEMS, false );      //Suggested items shop panel.
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_TEAMS, false );     //Hero selection Radiant and Dire player lists.
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_GAME_NAME, false );     //Hero selection game mode name display.
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_HERO_SELECTION_CLOCK, false );     //Hero selection clock.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_MENU_BUTTONS, false );     //Top-left menu buttons in the HUD.
-		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_BAR_BACKGROUND, false );     //Top-left menu buttons in the HUD.
-
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_FLYOUT_SCOREBOARD, false );      //Lefthand flyout scoreboard.
-		GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_ENDGAME, false );      //Endgame scoreboard.    
 
 		GameEvents.Subscribe("CreateIngameErrorMessage", function(data) 
 		{
@@ -256,37 +248,5 @@
 	</script>
 
 	<Panel>
-		<!-- CustomUIElements go here.-->
-		<CustomUIElement type="GameInfo" layoutfile="file://{resources}/layout/custom_game/imba_game_info.xml" />
-		<CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/multiteam_hero_select_overlay.xml" />
-		<CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/vanilla_hero_selection.xml" /> 
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/barebones_notifications.xml" /> 
-		<CustomUIElement type="CustomGameSetup" layoutfile="file://{resources}/layout/custom_game/team_select.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud_hero_demo.xml" />
-<!--	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/ardm_precache.xml" /> -->
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/gg.xml" /> 
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/combat_events.xml" /> 
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hero_selection.xml" /> 
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/selection.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/diretide.xml" />
-
-		<!-- Enable only during diretide -->
-<!--	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/diretide_note.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/roshan_health_bar.xml" /> 
--->
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/battlepass.xml" /> 
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/mutation.xml" /> 
-<!--	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/precache.xml" /> -->
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/overthrow_item_notification.xml" />
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/manifold_paradox.xml" />
-<!--	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/imba_item_builds.xml" /> -->
-<!--	<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/imba_plus_stats.xml" /> -->
-
-<!--	<CustomUIElement type="EndScreen" layoutfile="file://{resources}/layout/custom_game/frostrose_end_screen.xml" /> -->
-		<CustomUIElement type="EndScreen" layoutfile="file://{resources}/layout/custom_game/frostrose_end_screen_v2/dashboard_page_post_game.xml" />
-		<CustomUIElement type="FlyoutScoreboard" layoutfile="file://{resources}/layout/custom_game/multiteam_flyout_scoreboard.xml" />
-
-		<!-- Credits: Dota 12v12 (Dota 2 Unofficial dev team) -->
-		<CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/dota_hud_chat_wheel.xml" />
 	</Panel>
 </root>
