@@ -20,11 +20,16 @@ function ToggleBattlepass() {
 (function() {
 	var player_battlepass = CustomNetTables.GetTableValue("battlepass", Game.GetLocalPlayerID().toString())
 
-//	$.Msg(player_battlepass)
+	$.Msg(player_battlepass)
+
+	if (player_battlepass == undefined)
+		return;
 
 	$.GetContextPanel().FindChildTraverse("LevelNumber").text = player_battlepass.Lvl;
 	$.GetContextPanel().FindChildTraverse("PointsNeeded").text = player_battlepass.XP + " / " + player_battlepass.MaxXP
 	$.GetContextPanel().FindChildTraverse("TilNextLevel").value = player_battlepass.XP / player_battlepass.MaxXP
+	$.Msg($.GetContextPanel().FindChildTraverse("RewardsList").GetChild(0).GetChild(0).FindChildTraverse("Path18"))
+
 
 	/* todo: find a way to use classes in event_level_shield.css
 	DOTAEventLevelShield.Season_International2019.EventTierNone #ShieldBackground { background-image: url("s2r://panorama/images/compendium/international2019/basic_shield_icon_psd.vtex"); }

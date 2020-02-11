@@ -110,36 +110,36 @@ var api = {
 	},
 };
 
-if (Game.IsInToolsMode()) {
-
-	var info = {
-		steamid: Game.GetLocalPlayerInfo().player_steamid,
-		hero: "npc_dota_hero_zuus",
-	};
+(function () {
+	if (Game.IsInToolsMode()) {
+		var info = {
+			steamid: Game.GetLocalPlayerInfo().player_steamid,
+			hero: "npc_dota_hero_zuus",
+		};
 
 /*
-	api.get_player_armory(info).then(function (data) {
-		$.Msg(data);
-	}).catch(function (err) {
-		$.Msg(err)
-	});
+		api.get_player_armory(info).then(function (data) {
+			$.Msg(data);
+		}).catch(function (err) {
+			$.Msg(err)
+		});
 */
 
-	var info = {
-		steamid: Game.GetLocalPlayerInfo().player_steamid,
-		slot_id: "persona_selector",
-		hero: "npc_dota_hero_invoker",
-		isEquipped: 1,
-		item_id: "13042",
-	};
+		var info = {
+			steamid: Game.GetLocalPlayerInfo().player_steamid,
+			slot_id: "persona_selector",
+			hero: "npc_dota_hero_invoker",
+			isEquipped: 1,
+			item_id: "13042",
+		};
 
-	api.update_player_armory(info).then(function (data) {
-		$.Msg(data);
-	}).catch(function (err) {
-		$.Msg(err)
-	});
-
-}
+		api.update_player_armory(info).then(function (data) {
+			$.Msg(data);
+		}).catch(function (err) {
+			$.Msg(err)
+		});
+	}
+})();
 
 /*
 var api = {
