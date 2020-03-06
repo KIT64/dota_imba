@@ -263,7 +263,5 @@
 -->
 
 		<CustomUIElement type="GameInfo" layoutfile="file://{resources}/layout/custom_game/imba_game_info.xml" />
-
-		<CustomUIElement type="HeroSelection" layoutfile="file://{resources}/layout/custom_game/vanilla_hero_selection.xml" />
 	</Panel>
 </root>
