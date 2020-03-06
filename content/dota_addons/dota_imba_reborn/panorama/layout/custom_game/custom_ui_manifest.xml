@@ -1,8 +1,4 @@
 <root> 
-	<scripts>
-		<include src="file://{resources}/scripts/custom_game/vanilla_keybinds.js" />
-		<include src="file://{resources}/scripts/custom_game/imba_invoker_tooltips.js" />
-	</scripts>
 
 	<script>
 		//GameUI.SetDefaultUIEnabled( DotaDefaultUIElement_t.DOTA_DEFAULT_UI_TOP_TIMEOFDAY, false );      //Time of day (clock).
