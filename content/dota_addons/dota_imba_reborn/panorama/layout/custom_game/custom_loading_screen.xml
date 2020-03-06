@@ -5,7 +5,6 @@
 	</styles>
 
 	<scripts>
-		<include src="file://{resources}/scripts/custom_game/api.js"/>
 		<include src="file://{resources}/scripts/custom_game/custom_loading_screen.js"/>
 	</scripts>
 
@@ -16,7 +15,7 @@
 					<Label id="loading-title-text" text="Dota IMBA 42.0 - Leaked EarthSalamander sextape"/>
 					<Label id="loading-map-text" text="Loading ..."/>
 					<Label id="loading-content-text" html="true" text="Loading ..." />
-					<Button id="loading-link" onactivate="DOTADisplayURL('http://www.dota2imba.fr/home');">
+					<Button id="loading-link" onactivate="DOTADisplayURL('http://www.frostrose-studio.com/home');">
 						<Label id="loading-link-text" text="Loading ..." />
 					</Button>
 				</Panel>
