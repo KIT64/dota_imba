@@ -256,6 +256,8 @@
 	</script>
 
 	<Panel>
+		<!-- CustomUIElements go here.-->
+		<CustomUIElement type="GameInfo" layoutfile="file://{resources}/layout/custom_game/imba_game_info.xml" />
 
 	</Panel>
 </root>
