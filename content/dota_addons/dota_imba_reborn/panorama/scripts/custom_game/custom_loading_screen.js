@@ -30,16 +30,16 @@ function LoadingScreenDebug(args) {
 }
 
 function fetch() {
-	$.Msg("Fetching and setting loading screen data");
+//	$.Msg("Fetching and setting loading screen data");
 
 	// if data is not available yet, reschedule
 	if (!info_already_available()) {
-		$.Msg("Can't fetch, retry...");
+//		$.Msg("Can't fetch, retry...");
 		$.Schedule(0.1, fetch);
 		return;
 	}
 
-	$.Msg("Loading screen data fetched!");
+//	$.Msg("Loading screen data fetched!");
 
 	var game_options = CustomNetTables.GetTableValue("game_options", "game_version");
 	if (game_options == undefined) {
