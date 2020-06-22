@@ -10,10 +10,12 @@ var g_bShowAdvanceButton = true;
 
 function OnDialogReceived( data )
 {
+	$.Msg(data)
 	if ( data["DialogText"] ===  "" )
 		return;
 
 	g_bSentToAll = data["SendToAll"];
+
 	if ( !g_bSentToAll )
 	{
 		var vAbsOrigin = Entities.GetAbsOrigin( data["DialogEntIndex"] );
@@ -27,7 +29,7 @@ function OnDialogReceived( data )
 	$( "#FloatingDialogPanel" ).SetHasClass( "Visible", !g_bSentToAll && !data["JournalEntry"] );
 	$( "#DialogPanel" ).SetHasClass( "JournalEntry", data["JournalEntry"] );
 	$( "#DialogTitle" ).text = $.Localize( Entities.GetUnitName( data["DialogEntIndex"] ) );
-	$( "#DialogPortrait" ).SetUnit(Entities.GetUnitName( data["DialogEntIndex"] ), ""); 
+	$( "#DialogPortrait" ).SetUnit(Entities.GetUnitName( data["DialogEntIndex"] ), "", false); 
 	$( "#DialogPanel" ).SetHasClass( "ShowAdvanceButton", true );
 	$( "#FloatingDialogPanel" ).SetHasClass( "ShowAdvanceButton", true );
 
@@ -37,6 +39,7 @@ function OnDialogReceived( data )
 	g_nCurrentDialogLine = data["DialogLine"];
 	g_szPendingDialog = $.Localize( data["DialogText"] );
 	g_szConfirmToken = data["ConfirmToken"]
+
 	if ( !g_bSentToAll )
 	{
 		var szHeroLocalizedDialog = $.Localize( data["DialogText"] );
@@ -83,6 +86,7 @@ function AdvanceDialogThink()
 	}
 
 	g_nCurrentCharacter = Math.min( g_nCurrentCharacter + 1, g_szPendingDialog.length )
+
 	if ( g_nCurrentCharacter === g_szPendingDialog.length )
 	{
 		$( "#DialogLabel" ).text = g_szPendingDialog;

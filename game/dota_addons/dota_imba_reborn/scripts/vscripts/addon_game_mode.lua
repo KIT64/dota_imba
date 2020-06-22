@@ -34,6 +34,8 @@ function Precache( context )
 	-- control wisp death pfx
 	LinkLuaModifier("modifier_wisp_death", "components/abilities/heroes/hero_wisp", LUA_MODIFIER_MOTION_NONE)
 
+	LinkLuaModifier("modifier_npc_dialog", "components/modifiers/diretide/modifier_npc_dialog.lua", LUA_MODIFIER_MOTION_NONE)
+
 	-- Battlepass precaching
 --	Wearables:PrecacheWearables(context)
 

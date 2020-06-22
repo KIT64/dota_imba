@@ -1,0 +1,381 @@
+#DialogPanel
+{
+	horizontal-align: center;
+	vertical-align: bottom;
+	margin-bottom: 300px;
+	min-width: 500px;
+	min-height: 180px;
+	transition-property: pre-transform-scale2d, transform, opacity ;
+	transition-duration: .32s;
+	transition-delay: 0s, 0s, 0s;
+	transition-timing-function: ease-in-out;
+	pre-transform-scale2d: .1;
+	opacity: 0;
+}
+
+#DialogPanel.WardenNote,
+#DialogPanel.JournalEntry
+{
+	margin-left: 680px;
+	transform: translateX(-420px) translateY(-40px);
+}
+
+#DialogPanel.Visible
+{
+	pre-transform-scale2d: 1;
+	transform: translateX(0px) translateY(0px);
+	opacity: 1;
+	transition-delay: 0s, 0s, .12s;
+	
+}
+
+.ConfirmHeroIcon
+{
+	width: 84px;
+	height: 64px;
+	margin-top: -3px;
+	margin-left: -3px;
+	margin-right: -3px;
+	saturation: 0.5;
+	wash-color: #f31d;	
+}
+
+.Confirmed .ConfirmHeroIcon
+{
+	saturation: 1;
+	wash-color: #3f16;
+	brightness: 2;
+}
+
+#DialogPlayerConfirm
+{
+	//width: 600px;
+	horizontal-align: center;
+	flow-children: right;
+	border-radius: 8px;
+	margin-top: -16px;
+
+	visibility: collapse;
+}
+
+.ConfirmStyle #DialogPlayerConfirm
+{
+	visibility: visible;
+}
+
+.PlayerConfirm
+{
+	padding: 4px;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	border: 2px solid red;
+	margin-left: 6px;
+	margin-right: 6px;
+	background-color: #000e;
+}
+
+.PlayerConfirm.Confirmed
+{
+	border: 2px solid #0f0;
+}
+
+.PlayerConfirm > Label
+{
+	color: white;
+	
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+}
+
+.PlayerConfirm.Confirmed > Label
+{
+	color: #00FF00;
+}
+
+#ConfirmButton
+{
+	margin-top: 16px;
+	horizontal-align: center;
+	background-color: #76BC42;
+	border-radius: 8px;
+	flow-children: right;
+
+	visibility: collapse;
+}
+
+.CheckMark
+{
+	width: 32px;
+	height: 32px;
+	background-image: url("s2r://panorama/images/interface/check_psd.vtex");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;	
+}
+
+#ConfirmButton Label
+{
+	font-size: 20px;
+	font-weight: bold;
+	horizontal-align: left;
+}
+
+#ConfirmButton.Visible
+{
+	visibility: visible;
+}
+
+#ConfirmButton.Confirmed
+{
+	opacity: 0;
+}
+
+#GlassBallOverlay,
+#DialogPortrait
+{
+	width: 128px;
+	height: 128px;
+//	border-bottom-left-radius: 50%;
+//	border-bottom-right-radius: 50%;
+	border-radius: 50%;
+	box-shadow: fill #000000af -6px -6px 12px 12px;	
+	border: 2px solid black;
+	z-index: 1;
+}
+
+#DialogPanelBackground
+{
+	width: 100%;
+	height: 100%;
+	margin: 32px;
+
+}
+
+.WardenNote #JournalPageBackground
+{
+	background-image: url("s2r://panorama/images/interface/warden_paper_psd.vtex");
+	visibility: visible;
+}
+
+
+.JournalEntry #JournalPageBackground
+{
+	visibility: visible;
+}
+
+.WardenNote #SpeechBubbleContainer,
+.WardenNote #DialogPortrait,
+.WardenNote #GlassBallOverlay,
+.JournalEntry #SpeechBubbleContainer,
+.JournalEntry #DialogPortrait,
+.JournalEntry #GlassBallOverlay
+{
+	visibility: collapse;
+}
+
+#DialogPanelContent
+{
+	padding: 32px;
+	flow-children: down;
+}
+
+#JournalPageBackground
+{
+	width: 420px;
+	height: 560px;
+	background-image: url("s2r://panorama/images/interface/journal_paper_psd.vtex");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;	
+	visibility: collapse;	
+}
+
+.WardenNote .DialogPanelTitle,
+.JournalEntry .DialogPanelTitle
+{
+	z-index: 5;
+	background-color: transparent;
+	color: #49434C;
+	text-shadow: 0px 0px 2px 2 #49434C;
+	margin-top: 72px;
+	margin-left: 96px;
+	font-size: 24px;
+}
+
+.WardenNote .DialogPanelTitle
+{
+	color: black;
+	text-shadow: 0px 0px 2px 2 #000;
+}
+
+.WardenNote .DialogPanelText,
+.JournalEntry .DialogPanelText
+{
+	font-size: 28px;
+	font-weight: normal;
+	//font-family: Goudy Trajan Medium,FZKai-Z03,TH Sarabun New,YDYGO 540;
+	text-overflow: clip;
+	max-width: 340px;
+	
+	color: #49434C;
+	max-height: 450px;
+	text-overflow: shrink;
+	padding: 0px;
+	margin: 0px;
+	margin-top: 72px;
+	margin-left: 22px;
+	horizontal-align: center;
+}
+
+.WardenNote .DialogPanelText
+{
+	color: #31AFBF;
+}
+
+
+.WardenNote #CloseDialogButton,
+.JournalEntry #CloseDialogButton
+{
+	//transform: translateX(20px);
+	margin-top: 12px;
+	vertical-align: top;
+	margin-right: 0px;
+	wash-color: white;
+	border-color: #8490AF;
+	width: 38px;
+	height: 38px;
+}
+
+
+.DialogPanelTitle
+{
+	font-size: 24px;
+	color: #83C2FE;
+	margin-left: 72px;
+	margin-top: 26px;
+	background-color: #222a;
+	border-radius: 6px;
+	padding: 4px 18px;
+	padding-left: 64px;	
+	z-index: 0;
+	text-shadow: 2px 2px 0px 0 black;
+}
+
+#DialogPanelContent
+{
+	margin-left: 68px;
+	margin-top: 6px;
+	z-index: 2;	
+}
+
+.DialogPanelText
+{
+	//color: gradient( linear, 0% 0%, 0% 100%, from( #fff ), to( #ea7 ) );
+	//text-shadow: 2px 2px 0px 1 black;
+	color: black;
+	font-style: italics;
+	font-weight: bold;
+	font-size: 18px;
+	text-overflow: shrink;
+	max-width: 500px;
+	max-height: 200px;	
+	margin: 26px 36px;
+}
+
+#DialogLabelSizer
+{
+	color: #81818100;
+}
+
+.HiddenText
+{
+	color: #00000000;
+}
+
+
+.SpeechBubble
+{
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 24px;
+}
+
+.SpeechBubbleBackground
+{
+	width: 100%;
+	height: 100%;
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #ddd ), color-stop ( .5, #9CA6A6 ), to( #818Fb6 ) );	
+	border-radius: 14px;	
+	margin: 2px;
+}
+
+.desert_outpost .SpeechBubbleBackground,
+.desert_expanse .SpeechBubbleBackground,
+.desert_start .SpeechBubbleBackground,
+.desert_town .SpeechBubbleBackground
+{
+	background-color: gradient( linear, 0% 0%, 0% 100%, from( #F2CFA4 ), color-stop ( .5, #F2CFA4 ), to( #B69878 ) );	
+}
+
+.desert_outpost .SpeechBubbleCallout,
+.desert_expanse .SpeechBubbleCallout,
+.desert_start .SpeechBubbleCallout,
+.desert_town .SpeechBubbleCallout
+{
+	background-color: #F2CFA4;
+}
+
+.SpeechBubbleBackgroundOutline
+{
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	margin: 0px;
+	border-radius: 16px;
+}
+
+
+.SpeechBubbleCalloutSquash
+{
+	width: 64px;
+	height: 64px;
+	transform: translateX(-22px) translateY(-8px);
+	pre-transform-scale2d: 1, 0.4;
+	padding: 8px;
+}
+
+.SpeechBubbleCallout
+{
+	width: 100%;
+	height: 100%;
+	transform: rotateZ(45deg);
+	background-color: #9CA6A6;
+	border: 4px solid black;	
+	
+}
+
+#SpeechBubbleContainer
+{
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+}
+
+#GlassBallOverlay
+{
+	background-image: url("s2r://panorama/images/interface/glassoverlay_psd.vtex");
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	box-shadow: none;
+	border-width: 1px;
+}
+
+
+.ConfirmStyle #CloseDialogButton,
+.ConfirmStyle #ContinueDialogButton
+{
+	visibility: collapse;
+}

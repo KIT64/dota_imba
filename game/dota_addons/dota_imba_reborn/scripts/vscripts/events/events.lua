@@ -208,6 +208,16 @@ function GameMode:OnGameRulesStateChange(keys)
 				end)
 			end
 		end)
+
+		-- setup icefrog popup
+		local popup_positions = {}
+		popup_positions[2] = Vector(-7542, -6171, 544)
+		popup_positions[3] = Vector(6696, 6809, 386)
+
+		for i = 2, 3 do
+			local dummy = CreateUnitByName("npc_dummy_unit_perma", popup_positions[i], true, nil, nil, i)
+			dummy:AddNewModifier(dummy, nil, "modifier_npc_dialog", {})
+		end
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		-- start rune timers
 		if GetMapName() == Map1v1() then
